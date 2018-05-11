@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			#myform {
+				width: 350px;
+				margin: 0 auto;
+				border: 1px dotted black;
+			}
+			#myform input {
+				margin: 10px;
+			}
+		</style>
+	</head>
+	<body>
+		<form id="myform" action="" method="post">
+			<label>你的爱好有: </label>
+			<div><input type="checkbox">阅读</div>
+			<div><input type="checkbox">旅游</div>
+			<div><input type="checkbox">游戏</div>
+			<div><input type="checkbox">赌博</div>
+			<div><input type="checkbox">美食</div>
+			<a href="javascript:void(0);" id="allBtn">全选</a>
+			<a href="javascript:void(0);" id="canBtn">取消</a>
+			<a href="javascript:void(0);" id="revBtn">反选</a>
+		</form>
+		<script src="js/mylib.js"></script>
+		<script>
+			(function() {
+				var allCheckBoxes = document.querySelectorAll('#myform input[type=checkbox]');
+				$('allBtn').addEventListener('click', function() {
+					for (var i = 0; i < allCheckBoxes.length; i += 1) {
+						allCheckBoxes[i].checked = true;
+					}
+				});
+				$('canBtn').addEventListener('click', function() {
+					for (var i = 0; i < allCheckBoxes.length; i += 1) {
+						allCheckBoxes[i].checked = false;
+					}
+				});
+				$('revBtn').addEventListener('click', function() {
+					for (var i = 0; i < allCheckBoxes.length; i += 1) {
+						allCheckBoxes[i].checked = !allCheckBoxes[i].checked;
+					}
+				});
+			}());
+		</script>
+	</body>
+</html>

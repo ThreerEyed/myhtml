@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			body {
+				width: 960px;
+				margin: 0 auto;
+			}
+			#adv {
+				margin: 0 auto;
+			}
+		</style>
+	</head>
+	<body>
+		<button id="closeBtn">关闭窗口</button>
+		<button id="advBtn">显示广告</button>
+		<div id="adv">
+			<img class="foo" src="img/20180205110717232.jpg" width="960">
+		</div>
+		<script src="js/mylib.js"></script>
+		<script>
+		(function() {
+			// window
+			//	- document - DOM
+			//	- location - 地址栏
+			//	- history - 历史记录
+			//	- navigator - 浏览器
+			//	- screen - 操作系统窗口
+			$('closeBtn').addEventListener('click', function() {
+				if (window.confirm('确定关闭窗口吗?')) {
+					window.close();
+				} else {
+					window.print();
+				}
+			});
+			
+			$('advBtn').addEventListener('click', function() {
+				// 现在的浏览器默认都会拦截浏览器的弹窗行为
+				window.open('http://www.baidu.com', 'Shit', 'width=200,height=200,location=no');
+			});
+			
+			
+			function changeImage() {
+				currentIndex += 1;
+				currentIndex %= advImages.length;
+				// querySelector - 根据指定的选择器查找单个元素
+				// querySelectorAll - 根据指定的选择器查找所有元素
+				var img = document.querySelector('#adv>img');
+				img.src = 'img/' + advImages[currentIndex];
+			}
+			
+			var advImages = [
+				'20180205110717232.jpg',
+				'20180420161945727.jpg',
+				'20180423155053370.jpg',
+				'20180428111317903.jpg',
+				'20180501095627777.jpg'
+			];
+			var currentIndex = 0;
+			var timer = window.setInterval(changeImage, 2000);
+			$('adv').addEventListener('mouseover', function() {
+				window.clearInterval(timer);
+			});
+			$('adv').addEventListener('mouseout', function() {
+				timer = window.setInterval(changeImage, 2000);
+			});
+		}());
+		</script>
+	</body>
+</html>

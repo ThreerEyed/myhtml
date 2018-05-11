@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			#timer {
+				float: right;
+				width: 450px;
+				height: 40px;
+				text-align: center;
+				font: 28px/40px Arial, "微软雅黑";
+				background-color: blue;
+				color: yellow;
+			}
+			#button {
+				clear: both;
+				float: right;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="timer"></div>
+		<div id="button">
+			<button id="ok">暂停</button>
+		</div>
+		<script src="js/mylib.js"></script>
+		<script>
+		function showTime() {
+			var currentTime = new Date();
+			var timeStr = currentTime.getFullYear() + '年 ';
+			var month = currentTime.getMonth() + 1;
+			// condition ? value1 : value2 - 三元条件运算符 - 问号前面的条件如果成立取冒号前面的值否则取冒号后面的值
+			// Elvis运算符(猫王运算符) - ?:
+			// Python - value1 if condition else value2
+			timeStr += month < 10 ? '0' : '';
+			timeStr += month + '月';
+			var date = currentTime.getDate();
+			timeStr += date < 10 ? '0' : '';
+			timeStr += date + '日 ';
+			// 使用数组保存可能的取值避免使用分支结构
+			var weekdays = ['日', '一', '二', '三', '四', '五', '六'];
+			timeStr += '星期' + weekdays[currentTime.getDay()] + ' ';
+			var hour = currentTime.getHours();
+			timeStr += hour < 10 ? '0' : '';
+			timeStr += hour + ':';
+			var minute = currentTime.getMinutes();
+			timeStr += minute < 10 ? '0' : '';
+			timeStr += minute + ':'
+			var second = currentTime.getSeconds();
+			timeStr += second < 10 ? '0' : '';
+			timeStr += second;
+			$('timer').textContent = timeStr;
+		}
+		
+		(function() {
+			showTime();
+			var timer = 0;
+			$('ok').addEventListener('click', function(evt) {
+				if (timer != 0) {
+					window.clearInterval(timer);
+					timer = 0;
+					evt.target.textContent = '继续';
+				} else {
+					timer = window.setInterval(showTime, 1000);
+					evt.target.textContent = '暂停';
+				}
+			});
+			timer = window.setInterval(showTime, 1000);
+		}());
+		</script>
+	</body>
+</html>

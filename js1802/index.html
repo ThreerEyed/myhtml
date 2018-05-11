@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<style type="text/css">
+			#sec {
+				color: red;
+			}
+		</style>
+	</head>
+	<body>
+		<h3><strong id="sec">5</strong>秒钟以后自动跳转到百度</h3>
+		<script src="js/mylib.js"></script>
+		<script>
+			(function() {
+				var counter = 5;
+				window.setTimeout(function() {
+					counter -= 1;
+					if (counter == 0) {
+						location.href = 'http://www.baidu.com';
+					} else {
+						$('sec').textContent = counter;
+						window.setTimeout(arguments.callee, 1000);
+					}
+				}, 1000);
+			}());
+		</script>
+	</body>
+</html>

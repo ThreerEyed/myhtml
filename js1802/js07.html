@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<h1 id="foo">Hello, world!</h1>
+		<script src="js/mylib.js"></script>
+		<script>
+			(function() {
+				// 要修改样式直接通过元素的style属性就可以做到
+				// 要读取样式的话需要通过window对象的getComputedStyle()
+				// style属性 - 只写不读
+				// getComputedStyle() - 只读不写
+				var h1Style = getStyle($('foo'));
+				var newSize = parseInt(h1Style.fontSize) * 5;
+				$('foo').style.fontSize = newSize + 'px';
+				// isNaN() - 是不是不是一个数
+				// parseInt() - 取整数如果取不出返回NaN
+				// parseFloat() - 取小数如果取不出返回NaN
+				// isFinite() - 是不是有限数值
+				// eval() - 非常强大的函数 evaluate - XSS(跨站脚本攻击)
+				// encodeURIComponent() - 处理成百分号编码
+				// decodeURIComponent() - 将百分号编码解码还原
+				alert(eval('3 * (2 + 5) / 7 * 100'));
+				var str = 'function() { return 100; }';
+				// var f = eval('(' + str + ')');
+				var jsonStr = '{ "name": "Hao", "age": 38 }';
+				var stu = eval('(' + jsonStr + ')');
+				alert(typeof stu);
+				alert(stu.name);
+				alert(stu.age);
+				alert(encodeURIComponent('骆昊', 'utf-8'));
+				alert(decodeURIComponent('%E9%AA%86%E6%98%8A', 'utf-8'));
+			}());
+		</script>
+	</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Hello</title>
+		<style>
+			#page li {
+				width: 180px;
+				height: 40px;
+				line-height: 40px;
+				border-bottom: 1px solid lightgray;
+				list-style: none;
+				text-align: center;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="page">
+			<h1 id="header">List</h1>
+			<h2>Buy groceries</h2>
+			<ul>
+				<li id="one" class="hot"><em>fresh</em> figs</li>
+				<li id="two" class="hot">pine nuts</li>
+				<li id="three" class="hot">honey</li>
+				<li id="four">balsamic vinegar</li>
+			</ul>
+			<div>
+				<h2>Shit</h2>
+			</div>
+		</div>
+		<h2>Goodbye</h2>
+		<script>
+			// 查找元素的方法
+			// 	- getElementById()
+			//	- getElementsByTagName()
+			//	- getElementsByClassName()
+			//	- querySelector()
+			//	- querySelectorAll()
+			// 修改节点的内容和属性
+			//	- textContent / innerHTML / nodeValue
+			//	- 访问成员运算符 
+			//	- setAttribute() / getAttribute() / removeAttribute()
+			(function() {
+				var hs= document.querySelectorAll('#page>h2');
+				for (var i = 0; i < hs.length; i += 1) {
+					// hs[i].innerHTML = '<em>I love you</em>';
+					hs[i].firstChild.nodeValue= 'Dinner is on me.';
+					// hs[i].id = 'foo';
+					hs[i].setAttribute('id', 'bar');
+					// alert(hs[i].getAttribute('id'));
+					hs[i].removeAttribute('id');
+					// alert(hs[i].getAttribute('id'));
+				}
+				var ul = document.querySelector('#page>ul');
+				// 创建新节点 - createElement()
+				// 追加新的子节点 - appendChild() / insertBefore()
+				// 删除子节点 - removeChild()
+				var li = document.createElement('li');
+				li.className = 'hot';
+				li.textContent = 'new item';
+				// 如果已经获得一个节点 如何访问它的父节点、子节点、兄弟节点
+				// parentNode
+				// children / firstChild / lastChild
+				// nextSibling / prevSibling
+				ul.insertBefore(li, ul.firstChild);
+				var es = document.getElementsByClassName('hot');
+				for (var i = 0; i < es.length; i += 1) {
+					es[i].style.backgroundColor = 'coral';
+				}
+			}());
+		</script>
+	</body>
+</html>

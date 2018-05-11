@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			#fruits li {
+				width: 180px;
+				height: 40px;
+				list-style: none;
+				background-color: darkolivegreen;
+				color: white;
+				text-align: center;
+				font: 22px/40px "微软雅黑";
+				border-bottom: 1px solid lightgray;
+			}
+			#fInput {
+				margin-left: 40px;
+			}
+			#fruits~input {
+				height: 30px;
+				font: 14px/30px "微软雅黑";
+			}
+			input[type=button] {
+				border: none;
+				background-color: red;
+				color: white;
+			}
+			#fruits a {
+				position: relative;
+				left: 30px;
+				display: inline-block;
+				width: 15px;
+				height: 15px;
+				background: url(img/ui-icons-trans.png) no-repeat -95px -130px;
+			}
+			#adv {
+				position: fixed;
+				top: 100px;
+				right: 50px;
+				width: 150px;
+				height: 150px;
+				color: yellow;
+				background-color: blue;
+			}
+			#closeBtn {
+				border: 1px solid gray;
+				float: right;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="adv">
+			<button id="closeBtn">关闭</button>
+		</div>
+		<h2>水果列表</h2>
+		<hr>
+		<ul id="fruits">
+			<li>苹果<a href="javascript:void(0);"></a></li>
+			<li>葡萄<a href="javascript:void(0);"></a></li>
+			<li>榴莲<a href="javascript:void(0);"></a></li>
+		</ul>
+		<input type="text" id="fInput">
+		<input type="button" value="添加" id="addBtn">
+		<script src="js/mylib.js"></script>
+		<script>
+			(function() {
+				var counter = 0;
+				$('closeBtn').addEventListener('click', function() {
+					counter += 1;
+					if (counter == 3) {
+						$('adv').style.display = 'none';
+					} else {
+						window.open('http://www.baidu.com');
+					}
+				});
+				// 这种编程模式一般称为"委托回调"
+				// 这种函数是留给浏览器来调用的通常称之为事件回调(callback)函数
+				// 程序员知道事件发生的时候要做什么但并不知道事件什么时候会触发
+				// 代表事件对象的evt参数是事件发生时浏览器回调函数时传入
+				function removeItem(evt) {
+					var li = evt.target.parentNode;
+					$('fruits').removeChild(li);
+				}
+				
+				$('addBtn').addEventListener('click', function() {
+					var fruitName = $('fInput').value.trim();
+					if (fruitName != '') {
+						var li = document.createElement('li');
+						li.textContent = fruitName;
+						var a = document.createElement('a');
+						a.href = 'javascript:void(0);';
+						a.addEventListener('click', removeItem);
+						li.appendChild(a);
+						$('fruits').appendChild(li);
+						$('fInput').value = '';
+						$('fInput').focus();
+					}
+				});
+				var delBtns = document.querySelectorAll('#fruits a');
+				for (var i = 0; i < delBtns.length; i += 1) {
+					delBtns[i].addEventListener('click', removeItem);
+				}
+			}());
+		</script>
+	</body>
+</html>
